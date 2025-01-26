@@ -1,22 +1,17 @@
-import { useState } from "react";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import Main from "./components/Main";
-import MainDetail from "./components/MainDetailProduct";
-import Section from "./components/Section";
+import { BrowserRouter, Routes, Route } from "react-router";
+import Main from "./views/HomePage";
+import BaseLayout from "./views/BaseLayout";
+import MainDetail from "./views/MainDetailProduct";
 
-function App() {
-  const [page, setPage] = useState("Detail");
+export default function App() {
   return (
-    <>
-      <Header />
-      {/* Hero Section */}
-      <Section />
-      {/* Menu Section */}
-      {page === "Home" && <Main setPage={setPage} />}
-      {page === "Detail" && <MainDetail setPage={setPage} />}
-      <Footer />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<BaseLayout />}>
+          <Route path="/" element={<Main />} />
+          <Route path="/:id" element={<MainDetail />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
-export default App;
