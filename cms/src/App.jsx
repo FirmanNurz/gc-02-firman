@@ -1,59 +1,31 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./index.css";
-import Preloader from "./components/Preloader";
-import Navbar from "./components/Navbar";
-import LoginSection from "./components/LoginSection";
-import Sidebar from "./components/Sidebar";
-import Product from "./components/Product";
-import NewProduct from "./components/NewProduct";
-import UpdateSection from "./components/UpdateSection";
-import CategorySection from "./components/CategorySection"
-import NewUser from "./components/NewUser";
+import { BrowserRouter, Routes, Route } from "react-router";
+import BaseLayout from "./views/BaseLayout";
+import LoginPage from "./views/LoginPage";
+import HomePage from "./views/HomePage";
+import AddCuisine from "./views/AddCuisine";
+import EditCuisine from "./views/EditCuisine";
+import UploadImage from "./views/UploadImage";
+import Categories from "./views/Categories";
+import AddUser from "./views/AddUser";
+import CuisineDetail from "./views/CuisineDetail";
 
-function App() {
-  const [count, setCount] = useState(0);
-
+export default function App() {
   return (
     <>
-      <>
-        {/* Preloader */}
-        <Preloader/>
-        {/* End Preloader */}
-        {/* Navbar */}
-        <Navbar/>
-        {/* End Navbar */}
-        {/* Login Section */}
-        <LoginSection/>
-        {/* End Login Section */}
-        {/* Home Section */}
-        <section className="container-fluid" id="home-section">
-          <div className="row">
-            {/* Sidebar */}
-            <Sidebar/>
-            {/* End Sidebar */}
-            {/* Product Section */}
-            <Product/>
-            {/* End Product Section */}
-            {/* New Product Section */}
-            <NewProduct/>
-            {/* End New Product Section */}
-            {/* Update Section */}
-            <UpdateSection/>
-            {/* End Update Section */}
-            {/* Category Section */}
-            <CategorySection />
-            {/* End Category Section */}
-            {/* New User Section */}
-            <NewUser/>
-            {/* End New User Section */}
-          </div>
-        </section>
-        {/* End Home Section */}
-      </>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<AddUser />} />
+          <Route element={<BaseLayout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/cuisines/add" element={<AddCuisine />} />
+            <Route path="/cuisines/:id" element={<CuisineDetail />} />
+            <Route path="/cuisines/:id/edit" element={<EditCuisine />} />
+            <Route path="/cuisines/:id/upload" element={<UploadImage />} />
+            <Route path="/categories" element={<Categories />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
-
-export default App;
